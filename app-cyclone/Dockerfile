@@ -5,7 +5,7 @@ FROM nginx
 RUN rm /usr/share/nginx/html/*
 
 # Copy your HTML files to the NGINX document root
-COPY test.html /usr/share/nginx/html/test.html
+COPY test.html /usr/share/nginx/html
 
 # Expose port 80 for incoming traffic
 EXPOSE 8088
