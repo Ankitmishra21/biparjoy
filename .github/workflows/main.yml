@@ -26,9 +26,9 @@ jobs:
 
       - name: Build and Push Docker image
         env:
-          pwd
           ECR_REGISTRY: public.ecr.aws/c6j6a0e2/biparjoy  # Replace with your ECR registry URL
           IMAGE_TAG: ${{ github.sha }}
         run: |
+          pwd
           docker build -t $ECR_REGISTRY:$IMAGE_TAG .
           docker push $ECR_REGISTRY:$IMAGE_TAG
