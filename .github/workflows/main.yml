@@ -23,7 +23,7 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
-
+        
       - name: Build and Push Docker image
         env:
           ECR_REGISTRY: public.ecr.aws/c6j6a0e2/biparjoy  # Replace with your ECR registry URL
