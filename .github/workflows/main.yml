@@ -30,5 +30,6 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |
           pwd
+          cd ../app-cyclone/
           docker build -t $ECR_REGISTRY:$IMAGE_TAG .
           docker push $ECR_REGISTRY:$IMAGE_TAG
