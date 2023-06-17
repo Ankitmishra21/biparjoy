@@ -37,21 +37,21 @@ spec:
 ---
 
 ---
-apiVersion: "v1"
-kind: "Service"
+apiVersion: v1
+kind: Service
 metadata:
-  name: "app-cyclone"
+  name: app-cyclone
   labels:
-    name: "app-cyclone"
-  namespace: "default"
+    name: app-cyclone
+  namespace: default
 spec:
-  type: "LoadBalancer"
+  type: LoadBalancer
   selector:
-    name: "cyclone"
+    name: cyclone
   ports:
-    - name: "http"
-      port: 8088
+    - name: http
+      port: 80
       targetPort: 8088
-      protocol: "TCP"
+      protocol: TCP
 
 ---
