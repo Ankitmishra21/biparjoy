@@ -35,7 +35,7 @@ spec:
               cpu: 100m
               memory: 256Mi
           ports:
-            - containerPort: 8088
+            - containerPort: 8080
 ---
 
 ---
@@ -53,7 +53,7 @@ spec:
   ports:
     - name: "http"
       port: 80
-      targetPort: 8088
+      targetPort: 8080
       protocol: "TCP"
 
 ---
