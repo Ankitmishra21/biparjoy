@@ -34,8 +34,6 @@ spec:
             requests:
               cpu: 100m
               memory: 256Mi
-          ports:
-            - containerPort: 8080
 ---
 
 ---
