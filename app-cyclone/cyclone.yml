@@ -47,6 +47,7 @@ metadata:
     name: "app-cyclone"
   namespace: "default"
 spec:
+  type: "LoadBalancer"
   selector:
     name: "cyclone"
   ports:
