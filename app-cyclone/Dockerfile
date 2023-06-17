@@ -10,5 +10,6 @@ COPY test.html /usr/share/nginx/html
 # Expose port 80 for incoming traffic
 EXPOSE 8088
 
+
 # Start the NGINX server when the container launches
 CMD ["nginx", "-g", "daemon off;"]
