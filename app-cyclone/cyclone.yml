@@ -1,0 +1,57 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "app-cyclone"
+  labels:
+    name: "app-cyclone"
+  namespace: "default"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: app-cyclone
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      name: "app-cyclone"
+      labels:
+        name: "app-cyclone"
+    
+      containers:
+        - name: "app-cyclone"
+          image: "public.ecr.aws/c6j6a0e2/biparjoy:7bc16fbbcb288e32936892f2034dec490bad72e0:latest"
+          imagePullPolicy: Always
+          
+          resources:
+            limits:
+              cpu: 500m
+              memory: 500Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          ports:
+            - containerPort: 8001
+---
+
+---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  name: "app-cyclone"
+  labels:
+    name: "app-cyclone"
+  namespace: "default"
+spec:
+  selector:
+    name: "app-cyclone"
+  ports:
+    - name: "http"
+      port: 8081
+      targetPort: 8081
+      protocol: "TCP"
+---
