@@ -34,8 +34,8 @@ spec:
             requests:
               cpu: 100m
               memory: 256Mi
-          ports:
-            - containerPort: 80
+#           ports:
+#             - containerPort: 80
 ---
 
 ---
@@ -50,10 +50,10 @@ spec:
   type: LoadBalancer
   selector:
     name: cyclone
-#   ports:
-#     - name: "http"
-#       port: 80
-#       targetPort: 8088
-#       protocol: TCP
+  ports:
+    - name: "http"
+      port: 8088
+      targetPort: 80
+      protocol: TCP
 
 ---
