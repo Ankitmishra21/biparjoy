@@ -51,9 +51,13 @@ spec:
   selector:
     name: cyclone
   ports:
-    - name: "https"
-      port: 8088
-      targetPort: 80
+    - name: http
+      port: 80
       protocol: TCP
+      targetPort: 80
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: 80
 
 ---
