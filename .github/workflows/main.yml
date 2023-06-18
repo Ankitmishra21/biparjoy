@@ -36,3 +36,4 @@ jobs:
           aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/c6j6a0e2
           docker build -t $ECR_REGISTRY:$IMAGE_TAG .
           docker push $ECR_REGISTRY:$IMAGE_TAG
+          echo $ECR_REGISTRY:$IMAGE_TAG
