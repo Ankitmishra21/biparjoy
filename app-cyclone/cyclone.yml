@@ -56,6 +56,26 @@ spec:
       protocol: TCP
 
 ---
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-cyclone
+  labels:
+    name: app-cyclone
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    name: cyclone
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+      nodePort: 30000
+
+---
 # ---
 # apiVersion: networking.k8s.io/v1
 # kind: Ingress
