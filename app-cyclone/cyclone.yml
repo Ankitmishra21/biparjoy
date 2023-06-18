@@ -38,24 +38,24 @@ spec:
 #             - containerPort: 80
 ---
 
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: app-cyclone
-  labels:
-    name: app-cyclone
-  namespace: default
-spec:
-  #type: LoadBalancer
-  selector:
-    name: cyclone
-  ports:
-    - port: 80
-      targetPort: 80
-      protocol: TCP
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: app-cyclone
+#   labels:
+#     name: app-cyclone
+#   namespace: default
+# spec:
+#   #type: LoadBalancer
+#   selector:
+#     name: cyclone
+#   ports:
+#     - port: 80
+#       targetPort: 80
+#       protocol: TCP
 
----
+# ---
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
