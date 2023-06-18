@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: "cyclone"
-          image: "$image_tag"
+          image: "image_tag"
           imagePullPolicy: Always
           
           resources:
