@@ -1,0 +1,18 @@
+apiVersion: k8s.humalecttest.io/v1
+kind: ApplicationGroup
+metadata:
+  name: my-application-group
+spec:
+  applications:
+    - name: app-cyclone
+      domain: example.com
+      replicas: 1
+      # Additional application-specific configuration
+
+    - name: app-eathquake 
+      domain: example.com
+      replicas: 1
+      # Additional application-specific configuration
+    # Add more applications as needed
+
+
