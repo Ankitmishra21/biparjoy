@@ -59,14 +59,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: cyclone1
+  name: "cyclone1"
   labels:
-    name: cyclone1
+    name: "cyclone1"
   namespace: default
 spec:
   type: LoadBalancer
   selector:
-    name: cyclone
+    name: "cyclone"
   ports:
     - name: http
       port: 80
