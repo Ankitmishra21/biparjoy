@@ -38,37 +38,37 @@ spec:
              - containerPort: 80
 ---
 
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: "cyclone"
+#   labels:
+#     name: "cyclone"
+#   namespace: default
+# spec:
+#   type: LoadBalancer
+#   selector:
+#     name: "cyclone"
+#   ports:
+#     - port: 80
+#       targetPort: 80
+#       protocol: TCP
+
+# ---
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: cyclone
+  name: "app-cyclone"
   labels:
-    name: cyclone
-  namespace: default
-spec:
-  type: LoadBalancer
-  selector:
-    name: cyclone
-  ports:
-    - port: 80
-      targetPort: 80
-      protocol: TCP
-
----
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: app-cyclone
-  labels:
-    name: app-cyclone
+    name: "app-cyclone"
   namespace: default
 spec:
   type: NodePort
   selector:
-    name: cyclone
+    name: "cyclone"
   ports:
     - port: 80
       targetPort: 80
