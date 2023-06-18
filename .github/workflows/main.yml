@@ -37,5 +37,5 @@ jobs:
           docker build -t $ECR_REGISTRY:$IMAGE_TAG .
           docker push $ECR_REGISTRY:$IMAGE_TAG
           echo $ECR_REGISTRY:$IMAGE_TAG
-          sed -i 's/$image_tag/$ECR_REGISTRY:$IMAGE_TAG/g' app-cyclone/cyclone.yml
+          sed -i  -e 's|image_tag|'"${ECR_REGISTRY}:${IMAGE_TAG}"'|g' app-cyclone/cyclone.yml
           git push origin main
