@@ -50,9 +50,9 @@ spec:
   selector:
     name: "cyclone"
   ports:
-    - port: 80
+    - name: http
+      port: 80
       targetPort: 80
-      protocol: TCP
       nodePort: 30000
 
 ---
