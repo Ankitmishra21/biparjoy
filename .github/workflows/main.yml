@@ -37,7 +37,8 @@ jobs:
           docker build -t $ECR_REGISTRY:$IMAGE_TAG .
           docker push $ECR_REGISTRY:$IMAGE_TAG
           echo $ECR_REGISTRY:$IMAGE_TAG
-          sed -i  -e 's|image_tag|'"${ECR_REGISTRY}:${IMAGE_TAG}"'|g' cyclone.yml
+          #sed -i "s|$awsEcrRegistry/$awsEcrRepo:.\{0,120\}|$awsEcrRegistry/$awsEcrRepo:$dockerImageTag\"|g" "$file"
+          sed -i  -e 's|$ECR_REGISTRY}:.\{0,120\}|${ECR_REGISTRY}:${IMAGE_TAG}\"|g' cyclone.yml
           git config --global user.email "llimankit@gmail.com"
           git config --global user.name "Ankitmishra21"
           git add -A
