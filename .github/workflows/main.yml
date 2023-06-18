@@ -42,5 +42,5 @@ jobs:
           git config --global user.name "Ankitmishra21"
           git add -A
           git status
-          git commit -m "$ECR_REGISTRY"
+          git commit -m "${IMAGE_TAG}"
           git push origin main
