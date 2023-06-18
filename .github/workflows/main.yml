@@ -41,6 +41,7 @@ jobs:
           git config --global user.email "llimankit@gmail.com"
           git config --global user.name "Ankitmishra21"
           git add -A
+          #check status
           git status
           git commit -m "${IMAGE_TAG}"
           git push origin main
