@@ -56,3 +56,19 @@ spec:
       nodePort: 30000
 
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cyclone1
+  labels:
+    name: cyclone1
+  namespace: default
+spec:
+  type: LoadBalancer
+  selector:
+    name: cyclone
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+---
