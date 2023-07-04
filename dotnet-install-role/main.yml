@@ -1,0 +1,7 @@
+---
+- name: Install .NET on Mac
+  hosts: mac
+  become: true
+  roles:
+    - dotnet-install-role
+

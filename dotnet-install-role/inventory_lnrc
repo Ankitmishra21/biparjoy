@@ -1,0 +1,17 @@
+[mac]
+10.244.32.104
+10.244.32.115
+10.244.32.199
+10.244.33.166
+[all:vars]
+ansible_connection=ssh
+ansible_user=ltuser
+ansible_ssh_pass=#mac@devops#
+#ansible_ssh_pass=#us#r@123X#
+ansible_become=yes
+ansible_become_method=sudo
+ansible_become_pass=#mac@devops#
+#ansible_become_pass=#us#r@123X#
+#ansible_python_interpreter=/usr/local/bin/python3
+timeout = 2
+

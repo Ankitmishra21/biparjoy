@@ -1,0 +1,50 @@
+---
+
+
+- name: Download dotnet-install.sh
+  ignore_errors: True
+  get_url:
+    url: "https://dot.net/v1/dotnet-install.sh"
+    dest: "/tmp/dotnet-install.sh"
+    mode: "0755"
+  register: download_result
+  failed_when: "'Connection refused' in download_result.msg"
+  changed_when: download_result.failed
+
+- name: Copy dotnet-install.sh
+  copy:
+    src: "{{ 'files/dotnet-install.sh' if download_result.changed else '/tmp/dotnet-install.sh' }}"
+    dest: "/tmp/dotnet-install.sh"
+    mode: 0755
+  when: download_result.changed
+
+
+- name: Install .NET
+  shell: "/tmp/dotnet-install.sh --channel 5.0 --version 5.0.407 --install-dir /usr/local/share/dotnet"
+  args:
+    executable: /bin/bash
+
+- name: Add .NET to the PATH
+  lineinfile:
+    dest: "/Users/ltuser/.bash_profile"
+    line: 'export PATH="/usr/local/share/dotnet:$PATH"'
+    state: present
+    insertafter: EOF
+
+- name: Reload the shell environment
+  become: true
+  shell: "source /Users/ltuser/.bash_profile"
+  args:
+        executable: /bin/bash
+
+- name: Validate .NET installation
+  shell: "/usr/local/share/dotnet/dotnet --info |grep Version"
+  register: dotnet_info
+  changed_when: false
+  failed_when: dotnet_info.rc != 0
+  ignore_errors: true
+
+- name: Display .NET information
+  debug:
+    var: dotnet_info.stdout_lines
+
