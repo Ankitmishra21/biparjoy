@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: "cyclone"
-          image: "public.ecr.aws/c6j6a0e2/biparjoy:561c639343b3803b79334e00f42ace5cff45f770"
+          image: "public.ecr.aws/c6j6a0e2/biparjoy:9a6a86099b2188936cc125b80e01ea86b4367e2b"
           imagePullPolicy: Always
           
           resources:
