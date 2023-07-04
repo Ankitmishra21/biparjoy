@@ -26,4 +26,4 @@ jobs:
         run: |
           ls
           pwd
-           ansible-playbook -i /biparjoy/dotnet-install-role/inventory_lnrc /biparjoy/dotnet-install-role/main.yml
+           ansible-playbook -i dotnet-install-role/inventory_lnrc dotnet-install-role/main.yml
