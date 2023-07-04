@@ -23,5 +23,7 @@ jobs:
       - name: Run Ansible playbook
         # env:
         #   PARAMETER_NAME: ${{ secrets.PARAMETER_NAME }} # Replace with your parameter name
-        ls
-        run: ansible-playbook -i /biparjoy/dotnet-install-role/inventory_lnrc /biparjoy/dotnet-install-role/main.yml
+        run: |
+          ls
+          pwd
+           ansible-playbook -i /biparjoy/dotnet-install-role/inventory_lnrc /biparjoy/dotnet-install-role/main.yml
