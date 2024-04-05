@@ -1,0 +1,124 @@
+provider "aws" {
+    region = "us-west-2"
+}
+resource "aws_vpc" "my_vpc" {
+    cidr_block = "10.0.0.0/16"
+}
+ #create public and private subnet resouce "aws subnet"
+
+    "public_subnet"{
+    vpc_id = "aws_vpc_my_vpc.id"
+    cidr_block = "10.0.1.0/24"
+    availablity_zone = "us-west-2a"
+ }
+
+ resouce "aws_subnet"
+ "private_subnet" {
+    vpc_id = aws_vpc_my_vpc.vpc.id
+    cidr_block = "10.0.2.0/24"
+    availablity_zone = "us-west-2b"
+ }
+resouce "aws_internet_gateway"
+"my_igw" {
+    vpc_id = aws_vpc_my_vpc.id
+}
+
+resouce "aws_route_table"
+"public_route_table" {
+    vpc_id = aws_vpc_my_vpc.id
+
+    route{
+        cidr_block = "0.0.0.0/0"
+        gateway_id =
+        aws_internet_gateway.my_igw.id
+    }
+}
+
+resouce "aws_route_table_association" "public_subnet_association" {
+    subnet_id = aws_subnet.public_subnet.id
+    route_table_id = aws_route_table.public_route_table.id
+}
+
+resource "aws_security_group" "instance_sg" {
+    name        = "instance_sg"
+    description = "sg for ec2"
+    vpc_id      = aws_vpc.my_vpc.id
+
+    ingress {
+        from_port       = 443
+        to_port         = 443
+        protocol        = "tcp"
+        cidr_block = ["10.0.2.0/24"] # allow traffic from private subnet
+    }
+    egress {
+        from_port       = 0
+        to_port         = 0
+        protocol        = "-1"
+        cidr_block      = ["0.0.0.0/0"]
+    }
+}
+
+resource "aws_instance" "ec2_instance" {
+    count          = 2
+    ami           = "ami-12345cvsf"
+    instance_type = "t3.micro"
+    subnet_id     = aws_subnet.subnet.id
+    security_groups = [aws_security_group.instance_sg.name]
+}
+
+resource "aws_acm_certificate" "dummy_cert" {
+    domain_name       = "example.com"
+    validation_method = "DNS"
+
+    tags = {
+        Name = "dummy_cert"
+      }
+    }
+
+    resource "aws_lb" "my_alb" {
+        name               = "my_alb"
+        internal           = false
+        load_balancer_type = "application"
+        security_groups    = [aws_security_group.instance_sg.id]
+        subnets            = [aws_subnet.public_subnet.id]
+      
+        enable_deletion_protection = false
+
+        tags = {
+            Name = "my_alb"
+          }
+        }
+
+        resource "aws_lb_listener" "https_listener" {
+            load_balancer_arn = aws_lb..my_alb.arn
+            port              = "443"
+            protocol          = "HTTPS"
+            ssl_policy        = "ELBSecurityPolicy-2016-08"
+            certificate_arn   = "arn:aws:iam::187416307283:server-certificate/test_cert_rab3wuqwgja25ct3n4jdj2tzu4"
+        }
+
+        resource "aws_lb_target_group" "my_target_group" {
+            name     = "my_target_group"
+            port     = 80
+            protocol = "HTTP"
+            vpc_id   = aws_vpc.my_vpc.id
+
+            health_check {
+                path = "/"
+                protocol = "HTTP"
+                port  = "traffic-port"
+                healthy_theresold = 2
+                timeout = 3
+                interval = 30
+            }
+            tags = {
+                Name = "my-target-group"
+            }
+        }
+        resouce "aws_ib_target_group_attachment" "ec2_target_attachment" {
+            count = 2
+            targrt_group_arn = aws_lb_target_group.my_target_group.arn
+            target_id = aws_instance.ec2_instance[count.index].id
+            port = 80
+        
+        }
